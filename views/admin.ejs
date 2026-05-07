@@ -1,10 +1,10 @@
 <%- include('partials/header') %>
-<h2>Editor Artikel Markdown</h2>
+<h2>Editor Article Markdown</h2>
 <form action="/admin/save" method="POST">
-    <input type="text" name="title" placeholder="Judul" required>
-    <input type="text" name="slug" placeholder="slug-file (tanpa spasi)" required>
-    <input type="text" name="category" placeholder="Kategori" required>
-    <textarea name="content" placeholder="Isi Markdown..." required></textarea>
-    <button type="submit">Simpan Artikel</button>
+    <input type="text" name="title" placeholder="Title" required>
+    <input type="text" name="slug" placeholder="slug-file (without space)" required>
+    <input type="text" name="category" placeholder="Category" required>
+    <textarea name="content" placeholder="Input Markdown..." required></textarea>
+    <button type="submit">Save</button>
 </form>
 <%- include('partials/footer') %>

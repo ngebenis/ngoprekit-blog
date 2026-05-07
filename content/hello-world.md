@@ -1,8 +1,8 @@
 ---
-title: "Hello World: Membangun Website Sederhana"
+title: "Hello World: Building the simple Website"
 date: "2026-05-06"
 category: "Web Development"
 published: true
 ---
 # Hello World!
-Selamat datang di blog Ngoprek IT. Di artikel pertama ini, kita akan membahas betapa mudahnya membuat website sederhana menggunakan Node.js.
+Welcome to NgoprekIT Blog. At the first article, we will explain how to easy to build the simple website using Node.js.

@@ -1,8 +1,8 @@
 ---
-title: "Monitoring Sistem dan Implementasi AI"
+title: "Monitoring AI System and Implementation"
 date: "2026-05-08"
 category: "AI & Monitoring"
 published: true
 ---
 # Monitoring & AI
-Gunakan database seperti **InfluxDB** atau **Prometheus** untuk memantau server, dan integrasikan dengan AI untuk deteksi anomali.
+Use database for example: **InfluxDB** or **Prometheus** to watching server, and integrate with AI to detecting any anomaly.

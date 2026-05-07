@@ -8,12 +8,12 @@ const session = require('express-session');
 const app = express();
 const PORT = 3000;
 
-// Konfigurasi Session
+// Session Configuration
 app.use(session({
     secret: 'ngoprek-it-key-2026',
     resave: false,
     saveUninitialized: true,
-    cookie: { maxAge: 3600000 } // Session berlaku 1 jam
+    cookie: { maxAge: 3600000 } // Running Session 1 hour
 }));
 
 app.set('view engine', 'ejs');
@@ -21,9 +21,9 @@ app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 
 const CONTENT_DIR = path.join(__dirname, 'content');
-const ADMIN_PASSWORD = 'sup3r10r!'; // Silakan ganti password Anda
+const ADMIN_PASSWORD = 'admin@123!'; // Please change the password
 
-// Middleware Proteksi
+// Middleware Protection
 const authMiddleware = (req, res, next) => {
     if (req.session.isLoggedIn) return next();
     res.redirect('/login');
@@ -39,7 +39,7 @@ app.post('/login', (req, res) => {
         req.session.isLoggedIn = true;
         res.redirect('/admin');
     } else {
-        res.send('Password salah! <a href="/login">Kembali</a>');
+        res.send('Wrong Password! <a href="/login">Kembali</a>');
     }
 });
 
@@ -62,14 +62,14 @@ app.get('/', async (req, res) => {
 
         res.render('index', { posts, isLoggedIn: req.session.isLoggedIn });
     } catch (err) {
-        res.status(500).send("Error membaca konten: " + err.message);
+        res.status(500).send("Error while read the content: " + err.message);
     }
 });
 
 app.get('/post/:slug', async (req, res) => {
     try {
         const filePath = path.join(CONTENT_DIR, `${req.params.slug}.md`);
-        if (!fs.existsSync(filePath)) return res.status(404).send("Artikel tidak ditemukan");
+        if (!fs.existsSync(filePath)) return res.status(404).send("Article not found");
         
         const { data, content } = matter(fs.readFileSync(filePath, 'utf-8'));
         res.render('post', { 
@@ -78,7 +78,7 @@ app.get('/post/:slug', async (req, res) => {
             isLoggedIn: req.session.isLoggedIn 
         });
     } catch (err) {
-        res.status(500).send("Error memproses artikel.");
+        res.status(500).send("Error while process the article.");
     }
 });
 
@@ -100,7 +100,7 @@ app.post('/admin/save', authMiddleware, async (req, res) => {
         await fs.writeFile(path.join(CONTENT_DIR, `${slug}.md`), fileFullContent);
         res.redirect('/');
     } catch (err) {
-        res.status(500).send("Gagal menyimpan artikel.");
+        res.status(500).send("Failed to saving article.");
     }
 });
 
