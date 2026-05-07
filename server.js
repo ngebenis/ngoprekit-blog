@@ -5,7 +5,7 @@ const matter = require('gray-matter');
 const md = require('markdown-it')();
 
 const app = express();
-const PORT = 3000;
+const PORT = 3002;
 
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
