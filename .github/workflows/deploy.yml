@@ -1,0 +1,38 @@
+name: Deploy NgoprekIT CMS
+
+on:
+  push:
+    branches:
+      - main  # Ganti jika nama branch utama Anda bukan main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Step 1: Mengirim file ke VPS
+      - name: Copy files via SCP
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USERNAME }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          source: "./*"
+          target: "/var/www/html/ngoprek-cms"
+          # Kita gunakan subfolder ngoprek-cms agar tidak berantakan di root html
+
+      # Step 2: Install dependencies dan restart PM2 via SSH
+      - name: Execute SSH commands
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USERNAME }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          script: |
+            cd /var/www/html/ngoprek-cms
+            npm install --production
+            # Cek apakah aplikasi sudah jalan di PM2, jika belum maka start baru
+            pm2 describe ngoprek-cms > /dev/null && pm2 restart ngoprek-cms || pm2 start server.js --name "ngoprek-cms"
