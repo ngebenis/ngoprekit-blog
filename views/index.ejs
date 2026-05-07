@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css">
+    <title>Ngoprek IT Blog</title>
+</head>
+<body>
+    <header>
+        <h1>🔧 Ngoprek IT Blog</h1>
+        <p>Sharing tentang Node.js, Linux, DevOps, dan AI.</p>
+    </header>
+    <main>
+        <% posts.forEach(post => { %>
+            <article>
+                <h2><a href="/post/<%= post.slug %>"><%= post.title %></a></h2>
+                <small><%= post.date %> | Tag: <%= post.category %></small>
+            </article>
+        <% }) %>
+    </main>
+</body>
+</html>

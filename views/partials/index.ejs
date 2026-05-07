@@ -1,0 +1,9 @@
+<%- include('partials/header') %>
+<h2>Daftar Ngoprek</h2>
+<% posts.forEach(post => { %>
+    <article>
+        <h3><a href="/post/<%= post.slug %>"><%= post.title %></a></h3>
+        <small><%= post.date %> | <%= post.category %></small>
+    </article>
+<% }) %>
+<%- include('partials/footer') %>
